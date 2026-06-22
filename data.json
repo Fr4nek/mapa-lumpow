@@ -1,0 +1,34 @@
+[
+    {
+      "nazwa": "Lumpex Premium",
+      "adres": "ul. Marszałkowska 10, Warszawa",
+      "lat": 52.2297,
+      "lng": 21.0122,
+      "najtanszy_dzien": "Sobota",
+      "cennik": [
+        {"dzien": "Poniedziałek", "godziny": "09:00 - 19:00", "cena": "Nowa Dostawa"},
+        {"dzien": "Wtorek", "godziny": "09:00 - 19:00", "cena": "80 zł / kg"},
+        {"dzien": "Środa", "godziny": "09:00 - 19:00", "cena": "50 zł / kg"},
+        {"dzien": "Czwartek", "godziny": "09:00 - 17:00", "cena": "30 zł / kg"},
+        {"dzien": "Piątek", "godziny": "09:00 - 17:00", "cena": "15 zł / kg"},
+        {"dzien": "Sobota", "godziny": "09:00 - 14:00", "cena": "Wszystko po 5 zł"},
+        {"dzien": "Niedziela", "godziny": "Zamknięte", "cena": "-"}
+      ]
+    },
+    {
+      "nazwa": "Ciucholand u Basi",
+      "adres": "ul. Grodzka 5, Kraków",
+      "lat": 50.0647,
+      "lng": 19.9450,
+      "najtanszy_dzien": "Sobota",
+      "cennik": [
+        {"dzien": "Poniedziałek", "godziny": "10:00 - 18:00", "cena": "60 zł / kg"},
+        {"dzien": "Wtorek", "godziny": "10:00 - 18:00", "cena": "Nowa Dostawa!"},
+        {"dzien": "Środa", "godziny": "10:00 - 18:00", "cena": "40 zł / kg"},
+        {"dzien": "Czwartek", "godziny": "10:00 - 18:00", "cena": "25 zł / kg"},
+        {"dzien": "Piątek", "godziny": "10:00 - 16:00", "cena": "10 zł / kg"},
+        {"dzien": "Sobota", "godziny": "09:00 - 13:00", "cena": "Wyprzedaż 3 zł/szt"},
+        {"dzien": "Niedziela", "godziny": "Zamknięte", "cena": "-"}
+      ]
+    }
+  ]

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>LumpRadar - Mapa Lumpeksów</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="manifest" href="manifest.json">
+
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #111111;
+            font-family: Arial, sans-serif;
+        }
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+        .lump-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 11px;
+        }
+        .lump-table th, .lump-table td {
+            border: 1px solid #dddddd;
+            padding: 5px 6px;
+            text-align: left;
+        }
+        .lump-table th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        .badge-info {
+            background-color: #f0f4f8;
+            padding: 6px;
+            border-radius: 4px;
+            margin-top: 6px;
+            font-size: 12px;
+            border-left: 3px solid #0078ff;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        const map = L.map('map').setView([51.50, 20.00], 6);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        // Wykrywanie dzisiejszego dnia tygodnia
+        const dniTygodnia = ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"];
+        const dzisiejszyDzienNazwa = dniTygodnia[new Date().getDay()];
+
+        fetch('data.json')
+            .then(response => response.json())
+            .then(lumpeksy => {
+                
+                lumpeksy.forEach(lump => {
+                    
+                    let dzisiejszeGodziny = "Brak danych";
+                    let najtanszaCenaTekst = "Brak danych";
+                    let wierszeTabeli = '';
+                    
+                    lump.cennik.forEach(info => {
+                        // 1. Sprawdzamy godziny na dzisiaj
+                        if (info.dzien === dzisiejszyDzienNazwa) {
+                            dzisiejszeGodziny = info.godziny;
+                        }
+
+                        // 2. Szukamy ceny dla zdefiniowanego najtańszego dnia (pod filtry)
+                        if (info.dzien === lump.najtanszy_dzien) {
+                            najtanszaCenaTekst = info.cena;
+                        }
+
+                        // Generowanie wiersza tabeli
+                        wierszeTabeli += `
+                            <tr>
+                                <td><strong>${info.dzien.substring(0, 3)}.</strong></td>
+                                <td>${info.godziny}</td>
+                                <td>${info.cena}</td>
+                            </tr>
+                        `;
+                    });
+
+                    // Szablon okienka na mapie
+                    const trescPopupu = `
+                        <div style="min-width: 260px;">
+                            <h3 style="margin: 0 0 2px 0; color: #0078ff; font-size: 16px;">${lump.nazwa}</h3>
+                            <small style="color: #666; display: block;">${lump.adres}</small>
+                            
+                            <div class="badge-info">
+                                🕒 <strong>Dzisiaj otwarte:</strong> ${dzisiejszeGodziny}<br>
+                                💰 <strong>Najtaniej:</strong> ${lump.najtanszy_dzien} (${najtanszaCenaTekst})
+                            </div>
+
+                            <table class="lump-table">
+                                <thead>
+                                    <tr>
+                                        <th>Dzień</th>
+                                        <th>Godziny</th>
+                                        <th>Cena</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${wierszeTabeli}
+                                </tbody>
+                            </table>
+                        </div>
+                    `;
+
+                    L.marker([lump.lat, lump.lng])
+                        .addTo(map)
+                        .bindPopup(trescPopupu);
+                });
+            })
+            .catch(error => console.error('Błąd:', error));
+
+        window.addEventListener('resize', () => {
+            map.invalidateSize();
+        });
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+    </script>
+</body>
+</html>
