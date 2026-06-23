@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dodaj Lumpeks do bazy</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        .form-row .form-group {
+            flex: 1;
+        }
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #4a5568;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: #3182ce;
+            box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.2);
+        }
+        hr {
+            border: 0;
+            height: 1px;
+            background: #e2e8f0;
+            margin: 30px 0;
+        }
+        .cennik-row {
+            display: grid;
+            grid-template-columns: 150px 1fr 1fr;
+            gap: 15px;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .day-label {
+            font-weight: bold;
+            color: #4a5568;
+        }
+        button {
+            display: block;
+            width: 100%;
+            background-color: #3182ce;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 25px;
+        }
+        button:hover {
+            background-color: #2b6cb0;
+        }
+        .output-container {
+            margin-top: 30px;
+        }
+        textarea {
+            width: 100%;
+            height: 250px;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            background-color: #f8fafc;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🛒 Panel dodawania lumpeksu</h1>
+    
+    <form id="lumpexForm">
+        <div class="form-group">
+            <label for="nazwa">Nazwa lumpeksu:</label>
+            <input type="text" id="nazwa" placeholder="np. Lumpex Premium" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="adres">Adres:</label>
+            <input type="text" id="adres" placeholder="np. ul. Marszałkowska 10, Warszawa" required>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label for="lat">Szerokość geogr. (lat):</label>
+                <input type="number" id="lat" step="0.000001" placeholder="52.2297" required>
+            </div>
+            <div class="form-group">
+                <label for="lng">Długość geogr. (lng):</label>
+                <input type="number" id="lng" step="0.000001" placeholder="21.0122" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="najtanszy_dzien">Najtańszy dzień:</label>
+            <select id="najtanszy_dzien">
+                <option value="Poniedziałek">Poniedziałek</option>
+                <option value="Wtorek">Wtorek</option>
+                <option value="Środa">Środa</option>
+                <option value="Czwartek">Czwartek</option>
+                <option value="Piątek">Piątek</option>
+                <option value="Sobota">Sobota</option>
+                <option value="Niedziela">Niedziela</option>
+            </select>
+        </div>
+
+        <hr>
+        <h3>📅 Godziny otwarcia i cennik</h3>
+        
+        <div id="cennikContainer"></div>
+
+        <button type="button" onclick="generujJSON()">Generuj kod JSON</button>
+    </form>
+
+    <div class="output-container">
+        <label for="output">Wygenerowany obiekt JSON:</label>
+        <textarea id="output" readonly placeholder="Tutaj pojawi się gotowy kod..."></textarea>
+    </div>
+</div>
+
+<script>
+    // Tablica z dniami tygodnia i domyślnymi wartościami, żeby pisało się szybciej
+    const dniTygodnia = [
+        { nazwa: "Poniedziałek", godziny: "09:00 - 19:00", cena: "Nowa Dostawa" },
+        { nazwa: "Wtorek", godziny: "09:00 - 19:00", cena: "80 zł / kg" },
+        { nazwa: "Środa", godziny: "09:00 - 19:00", cena: "50 zł / kg" },
+        { nazwa: "Czwartek", godziny: "09:00 - 17:00", cena: "30 zł / kg" },
+        { nazwa: "Piątek", godziny: "09:00 - 17:00", cena: "15 zł / kg" },
+        { nazwa: "Sobota", godziny: "09:00 - 14:00", cena: "Wszystko po 5 zł" },
+        { nazwa: "Niedziela", godziny: "Zamknięte", cena: "-" }
+    ];
+
+    // Renderowanie pól dla każdego dnia tygodnia przy ładowaniu strony
+    const container = document.getElementById('cennikContainer');
+    dniTygodnia.forEach(dzien => {
+        const row = document.createElement('div');
+        row.className = 'cennik-row';
+        row.innerHTML = `
+            <div class="day-label">${dzien.nazwa}</div>
+            <div>
+                <input type="text" class="godziny-input" data-dzien="${dzien.nazwa}" value="${dzien.godziny}" placeholder="Godziny">
+            </div>
+            <div>
+                <input type="text" class="cena-input" data-dzien="${dzien.nazwa}" value="${dzien.cena}" placeholder="Cena / info">
+            </div>
+        `;
+        container.appendChild(row);
+    });
+
+    // Główna funkcja zbierająca dane i plująca JSONem
+    function generujJSON() {
+        // Sprawdzenie walidacji HTML5 (wymagane pola)
+        const form = document.getElementById('lumpexForm');
+        if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+        }
+
+        const cennik = [];
+        
+        // Zbieranie danych z wierszy cennika
+        dniTygodnia.forEach(dzien => {
+            const godziny = document.querySelector(`.godziny-input[data-dzien="${dzien.nazwa}"]`).value;
+            const cena = document.querySelector(`.cena-input[data-dzien="${dzien.nazwa}"]`).value;
+            
+            cennik.push({
+                dzien: dzien.naźwa || dzien.nazwa, // zachowanie nazwy dnia
+                godziny: godziny,
+                cena: cena
+            });
+        });
+
+        // Budowanie finałowego obiektu
+        const lumpexDane = {
+            nazwa: document.getElementById('nazwa').value,
+            adres: document.getElementById('adres').value,
+            lat: parseFloat(document.getElementById('lat').value),
+            lng: parseFloat(document.getElementById('lng').value),
+            najtanszy_dzien: document.getElementById('najtanszy_dzien').value,
+            cennik: cennik
+        };
+
+        // Wrzucenie ładnie sformatowanego JSONa do textarea
+        document.getElementById('output').value = JSON.stringify(lumpexDane, null, 4);
+    }
+</script>
+
+</body>
+</html>

@@ -1,34 +1,222 @@
 [
     {
-      "nazwa": "Lumpex Premium",
-      "adres": "ul. Marszałkowska 10, Warszawa",
-      "lat": 52.2297,
-      "lng": 21.0122,
-      "najtanszy_dzien": "Sobota",
-      "cennik": [
-        {"dzien": "Poniedziałek", "godziny": "09:00 - 19:00", "cena": "Nowa Dostawa"},
-        {"dzien": "Wtorek", "godziny": "09:00 - 19:00", "cena": "80 zł / kg"},
-        {"dzien": "Środa", "godziny": "09:00 - 19:00", "cena": "50 zł / kg"},
-        {"dzien": "Czwartek", "godziny": "09:00 - 17:00", "cena": "30 zł / kg"},
-        {"dzien": "Piątek", "godziny": "09:00 - 17:00", "cena": "15 zł / kg"},
-        {"dzien": "Sobota", "godziny": "09:00 - 14:00", "cena": "Wszystko po 5 zł"},
-        {"dzien": "Niedziela", "godziny": "Zamknięte", "cena": "-"}
-      ]
+        "nazwa": "Haliszka",
+        "adres": "Dworcowa 7, 10-413 Olsztyn",
+        "lat": 53.779882,
+        "lng": 20.501381,
+        "najtanszy_dzien": "Sobota",
+        "cennik": [
+            {
+                "dzien": "Poniedziałek",
+                "godziny": "09:00 - 18:00",
+                "cena": "x"
+            },
+            {
+                "dzien": "Wtorek",
+                "godziny": "09:00 - 18:00",
+                "cena": "x"
+            },
+            {
+                "dzien": "Środa",
+                "godziny": "09:00 - 18:00",
+                "cena": "x"
+            },
+            {
+                "dzien": "Czwartek",
+                "godziny": "09:00 - 18:00",
+                "cena": "x"
+            },
+            {
+                "dzien": "Piątek",
+                "godziny": "09:00 - 18:00",
+                "cena": "x"
+            },
+            {
+                "dzien": "Sobota",
+                "godziny": "09:00 - 15:00",
+                "cena": "x"
+            },
+            {
+                "dzien": "Niedziela",
+                "godziny": "09:00 - 15:00",
+                "cena": "x"
+            }
+        ]
     },
     {
-      "nazwa": "Ciucholand u Basi",
-      "adres": "ul. Grodzka 5, Kraków",
-      "lat": 50.0647,
-      "lng": 19.9450,
-      "najtanszy_dzien": "Sobota",
-      "cennik": [
-        {"dzien": "Poniedziałek", "godziny": "10:00 - 18:00", "cena": "60 zł / kg"},
-        {"dzien": "Wtorek", "godziny": "10:00 - 18:00", "cena": "Nowa Dostawa!"},
-        {"dzien": "Środa", "godziny": "10:00 - 18:00", "cena": "40 zł / kg"},
-        {"dzien": "Czwartek", "godziny": "10:00 - 18:00", "cena": "25 zł / kg"},
-        {"dzien": "Piątek", "godziny": "10:00 - 16:00", "cena": "10 zł / kg"},
-        {"dzien": "Sobota", "godziny": "09:00 - 13:00", "cena": "Wyprzedaż 3 zł/szt"},
-        {"dzien": "Niedziela", "godziny": "Zamknięte", "cena": "-"}
-      ]
+        "nazwa": "CTO - Centrum Taniej odzieży",
+        "adres": "plac Pułaskiego 6, 10-001 Olsztyn",
+        "lat": 53.781101,
+        "lng": 20.490656,
+        "najtanszy_dzien": "Wtorek",
+        "cennik": [
+            {
+                "dzien": "Poniedziałek",
+                "godziny": "08:00 - 19:00",
+                "cena": "x"
+            },
+            {
+                "dzien": "Wtorek",
+                "godziny": "08:00 - 19:00",
+                "cena": "x"
+            },
+            {
+                "dzien": "Środa",
+                "godziny": "08:00 - 19:00",
+                "cena": "x"
+            },
+            {
+                "dzien": "Czwartek",
+                "godziny": "08:00 - 19:00",
+                "cena": "x"
+            },
+            {
+                "dzien": "Piątek",
+                "godziny": "08:00 - 19:00",
+                "cena": "x"
+            },
+            {
+                "dzien": "Sobota",
+                "godziny": "08:00 - 16:00",
+                "cena": "x"
+            },
+            {
+                "dzien": "Niedziela",
+                "godziny": "Zamknięte",
+                "cena": "x"
+            }
+        ]
+    },
+    {
+        "nazwa": "Odzież Na Wagę",
+        "adres": "1 Maja 13, 10-340 Olsztyn",
+        "lat": 53.779671,
+        "lng": 20.480836,
+        "najtanszy_dzien": "Sobota",
+        "cennik": [
+            {
+                "dzien": "Poniedziałek",
+                "godziny": "8:00 - 18:00",
+                "cena": "85 zł / kg"
+            },
+            {
+                "dzien": "Wtorek",
+                "godziny": "8:00 - 18:00",
+                "cena": "70 zł / kg"
+            },
+            {
+                "dzien": "Środa",
+                "godziny": "8:00 - 18:00",
+                "cena": "60 zł / kg"
+            },
+            {
+                "dzien": "Czwartek",
+                "godziny": "8:00 - 18:00",
+                "cena": "50 zł / kg"
+            },
+            {
+                "dzien": "Piątek",
+                "godziny": "8:00 - 18:00",
+                "cena": "40 zł / kg"
+            },
+            {
+                "dzien": "Sobota",
+                "godziny": "8:00 - 14:00",
+                "cena": "28 zł / kg lub 8 zł / szt"
+            },
+            {
+                "dzien": "Niedziela",
+                "godziny": "Zamknięte",
+                "cena": "-"
+            }
+        ]
+    },
+    {
+        "nazwa": "SECONDLY Olsztyn",
+        "adres": "Doktora Stanisława Dorantta 1, 10-699 Olsztyn",
+        "lat": 53.731166,
+        "lng": 20.49538,
+        "najtanszy_dzien": "Poniedziałek",
+        "cennik": [
+            {
+                "dzien": "Poniedziałek",
+                "godziny": "10:00 - 19:00",
+                "cena": "x"
+            },
+            {
+                "dzien": "Wtorek",
+                "godziny": "10:00 - 19:00",
+                "cena": "x"
+            },
+            {
+                "dzien": "Środa",
+                "godziny": "10:00 - 19:00",
+                "cena": "x"
+            },
+            {
+                "dzien": "Czwartek",
+                "godziny": "10:00 - 19:00",
+                "cena": "x"
+            },
+            {
+                "dzien": "Piątek",
+                "godziny": "Zamkniete",
+                "cena": "x"
+            },
+            {
+                "dzien": "Sobota",
+                "godziny": "10:00 - 18:00",
+                "cena": "x"
+            },
+            {
+                "dzien": "Niedziela",
+                "godziny": "10:00 - 16:00",
+                "cena": "x"
+            }
+        ]
+    },
+    {
+        "nazwa": "Łap Ciuszek",
+        "adres": "Bp. T. Wilczyńskiego, 10-693 Olsztyn",
+        "lat": 53.7397,
+        "lng": 20.47953,
+        "najtanszy_dzien": "Poniedziałek",
+        "cennik": [
+            {
+                "dzien": "Poniedziałek",
+                "godziny": "08:00 - 18:00",
+                "cena": "x"
+            },
+            {
+                "dzien": "Wtorek",
+                "godziny": "08:00 - 18:00",
+                "cena": "x"
+            },
+            {
+                "dzien": "Środa",
+                "godziny": "08:00 - 18:00",
+                "cena": "x"
+            },
+            {
+                "dzien": "Czwartek",
+                "godziny": "08:00 - 18:00",
+                "cena": "x"
+            },
+            {
+                "dzien": "Piątek",
+                "godziny": "08:00 - 18:00",
+                "cena": "x"
+            },
+            {
+                "dzien": "Sobota",
+                "godziny": "08:00 - 18:00",
+                "cena": "x"
+            },
+            {
+                "dzien": "Niedziela",
+                "godziny": "Zamknięte",
+                "cena": "x"
+            }
+        ]
     }
-  ]
+]

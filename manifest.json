@@ -1,6 +1,6 @@
 {
     "name": "Responsywna Mapa PWA",
-    "short_name": "MapaPWA",
+    "short_name": "Lumpex",
     "start_url": "./index.html",
     "display": "standalone",
     "background_color": "#ffffff",
